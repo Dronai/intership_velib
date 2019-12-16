@@ -50,7 +50,7 @@ function get_list_bornes_zone($address, $pdo){
 }
 
 function get_info_address($address){
-    $apikey = 'AIzaSyD7AQNWiVKyCSlcBcIFZWfOMFIEIhmm1pw';
+    $apikey = 'KEYKEYKEY';
 
     $address = str_replace(" ", "+", $address);
 
