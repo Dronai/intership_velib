@@ -62,11 +62,11 @@
                 }
             });
 
-            for(borne in bornes ){
-                var coo = borne["geo"].split(',');
-                var marker = new google.map.Marker({
-                    position: {lat: coo[0], lng: coo['1']},
-                    title: "borne",
+            for(borne in bornes){
+
+                var born = borne["geo"].split(',');
+                var marker = new google.maps.Marker({
+                    position: {lat: born[0], lng: born[1]},
                     map: map
                 });
             }
