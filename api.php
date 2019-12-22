@@ -6,7 +6,7 @@ function get_list_bornes($pdo){
     $exe = $pdo->query($sql);
     $List_bornes = array();
     while($result = $exe->fetch(PDO::FETCH_OBJ)){
-        array_push($List_bornes, array("ID" => $result->geo));
+        array_push($List_bornes, array("id" => $result));
     }
 
     return json_encode($List_bornes);
@@ -42,6 +42,8 @@ function get_list_bornes_zone($address, $pdo){
            if($km < 0.5){
                array_push($bornesAvaible, $borne);
            }
+       }else{
+           echo "here error";
        }
     }
 
@@ -50,7 +52,7 @@ function get_list_bornes_zone($address, $pdo){
 }
 
 function get_info_address($address){
-    $apikey = 'KEYKEYKEY';
+    $apikey = 'AIzaSyD7AQNWiVKyCSlcBcIFZWfOMFIEIhmm1pw';
 
     $address = str_replace(" ", "+", $address);
 
