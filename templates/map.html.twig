@@ -1,4 +1,4 @@
-{%  extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
     <style type="text/css">
@@ -9,7 +9,6 @@
     </style>
 
     <h1> {{ title }} </h1>
-{{ bornes }}
     <form action="/search_map" method="GET">
         <div class="=container">
             <div class="row">
@@ -28,28 +27,38 @@
         </div>
     </form>
 
-    <div id="map">
-        <!-- Ici s'affichera la carte -->
-    </div>
+    {% if bornes is defined %}
+        {% if bornes == "[]" %}
+            <p>Unkonwn address</p>
+        {% endif %}
+        <div id="map" data-="{{ bornes }}">
+            <!-- Ici s'affichera la carte -->
+        </div>
+    {% else %}
+        <div id="map">
+            <!-- Ici s'affichera la carte -->
+        </div>
+    {% endif %}
+
+
 
 {% endblock %}
 
 {% block javascripts %}
 
-    <script src="https://maps.google.com/maps/api/js?key=KEYKEYKEY"
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyD7AQNWiVKyCSlcBcIFZWfOMFIEIhmm1pw"
             type="text/javascript"></script>
     <script async type="text/javascript">
         // On initialise la latitude et la longitude de Paris (centre de la carte)
         var lat = 48.852969;
         var lon = 2.349903;
         var map = null;
-        var bornes = '{{ bornes }}';
 
-            // Fonction d'initialisation de la carte
+        // Fonction d'initialisation de la carte
         function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
                 center: new google.maps.LatLng(lat, lon),
-                zoom: 11,
+                zoom: 13,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 mapTypeControl: true,
                 scrollwheel: false,
@@ -62,13 +71,32 @@
                 }
             });
 
-            for(borne in bornes){
+            if (document.getElementById('map').getAttribute("data-") != null) {
+                var bornes = document.getElementById('map').getAttribute("data-");
 
-                var born = borne["geo"].split(',');
-                var marker = new google.maps.Marker({
-                    position: {lat: born[0], lng: born[1]},
-                    map: map
-                });
+                if (typeof bornes !== 'undefined') {
+                    try {
+                        var bornesJS = JSON.parse(bornes);
+                        console.log(bornesJS);
+                        console.log(typeof bornesJS);
+                    } catch (e) {
+                        console.log(e);
+                    }
+
+                    for (let i = 0; i < Object.keys(bornesJS).length; i++) {
+                        if (bornesJS[i].isEmpty()) {
+
+                        } else {
+                            console.log(Object.keys(bornesJS).length);
+                            var gee = bornesJS[i].geo.split(',');
+                            console.log(parseFloat(gee[0]) + " " + parseFloat(gee[1]))
+                            var marker = new google.maps.Marker({
+                                position: {lat: parseFloat(gee[0]), lng: parseFloat(gee[1])},
+                                map: map,
+                            });
+                        }
+                    }
+                }
             }
         }
 

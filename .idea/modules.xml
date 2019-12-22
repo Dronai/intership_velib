@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://D:/Programmes/wamp64/www/app/.idea/app.iml" filepath="D:/Programmes/wamp64/www/app/.idea/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/velib.iml" filepath="$PROJECT_DIR$/.idea/velib.iml" />
     </modules>
   </component>

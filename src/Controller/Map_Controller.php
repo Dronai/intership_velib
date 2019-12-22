@@ -41,22 +41,24 @@ class Map_Controller extends AbstractController
     public function search_map()
     {
         $client = HttpClient::create();
-        $response = $client->request('GET', 'http://localhost/app/api.php?action=get_list_bornes_zone&address='.$_GET["address"]);
+        $response = $client->request('GET', 'http://api.boutin-p.fr/api.php?action=get_list_bornes_zone&address='.$_GET["address"]);
 
         try {
             $contentType = $response->getHeaders()['content-type'][0];
+            $content = $response->getContent();
 
-            $content = $response->getContent($contentType);
-            $contentJs = json_decode($content);
             return $this->render('map.html.twig', [
                 'title' => 'Map Velib',
-                'bornes' => $contentJs,
+                'bornes' => json_decode($content),
             ]);
         } catch (ClientExceptionInterface $e) {
+            echo "Error 1";
         } catch (RedirectionExceptionInterface $e) {
+            echo "Error 2";
         } catch (ServerExceptionInterface $e) {
+            echo "Error 3";
         } catch (TransportExceptionInterface $e) {
+            echo $e;
         }
-            return null;
     }
 }
