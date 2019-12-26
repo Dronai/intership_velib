@@ -1,10 +1,10 @@
 <?php
 
-define("USER", "boutinpfbedronai");//je défini le nom d'utilisateur pour se connecter à la base de donné
+define("USER", "USER");//je défini le nom d'utilisateur pour se connecter à la base de donné
 
-define("PASSWORD", "Dr0naiMan9ePomme5");//je défini le mot de passe
+define("PASSWORD", "PASSWORD");//je défini le mot de passe
 
-define("DNS", 'mysql:host=boutinpfbedronai.mysql.db;dbname=boutinpfbedronai');
+define("DNS", 'mysql:host=ADDRESS;dbname=DBNAME');
 
 try {
     $pdo = new PDO(DNS, USER, PASSWORD);
