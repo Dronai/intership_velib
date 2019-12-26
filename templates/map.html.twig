@@ -84,17 +84,12 @@
                     }
 
                     for (let i = 0; i < Object.keys(bornesJS).length; i++) {
-                        if (bornesJS[i].isEmpty()) {
-
-                        } else {
-                            console.log(Object.keys(bornesJS).length);
                             var gee = bornesJS[i].geo.split(',');
                             console.log(parseFloat(gee[0]) + " " + parseFloat(gee[1]))
                             var marker = new google.maps.Marker({
                                 position: {lat: parseFloat(gee[0]), lng: parseFloat(gee[1])},
                                 map: map,
                             });
-                        }
                     }
                 }
             }
